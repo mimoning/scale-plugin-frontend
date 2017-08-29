@@ -1,3 +1,13 @@
+@import '~daoColor';
+
 .pull-right {
   float: right;
+}
+
+.operate-icon {
+  color: $grey-dark;
+  cursor: pointer;
+  &:hover {
+    color: inherit;
+  }
 }

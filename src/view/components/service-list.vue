@@ -22,7 +22,7 @@
           <td>{{ service.lbMode }}</td>
           <!-- 操作 -->
           <td>
-            <svg class="icon">
+            <svg class="icon operate-icon">
               <use xlink:href="#icon_trash"></use>
             </svg>
           </td>

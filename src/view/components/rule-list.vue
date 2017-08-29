@@ -42,10 +42,10 @@
           <td>{{ rule.service }}</td>
           <!-- 操作 -->
           <td>
-            <svg class="icon">
+            <svg class="icon operate-icon">
               <use xlink:href="#icon_wrench"></use>
             </svg>
-            <svg class="icon">
+            <svg class="icon operate-icon">
               <use xlink:href="#icon_trash"></use>
             </svg>
           </td>
