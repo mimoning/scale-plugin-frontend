@@ -1,9 +1,13 @@
 import Vue from 'vue'
-
-import Hello from './Hello.vue'
+// components
+import EmptyState from './empty-state'
+import RuleList from './rule-list'
+import ServiceList from './service-list'
 
 const Components = {
-  Hello
+  EmptyState,
+  RuleList,
+  ServiceList
 }
 
 const components = {}

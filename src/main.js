@@ -12,6 +12,7 @@ import router from './router'
 
 // 导入所有的组件
 import './view/components'
+import { activate } from '@/model/hub'
 
 Vue.config.productionTip = false
 
@@ -22,6 +23,8 @@ Vue.use(VueRx, {
   BehaviorSubject
 })
 Vue.use(daoStyle)
+
+activate()
 
 /* eslint-disable no-new */
 new Vue({

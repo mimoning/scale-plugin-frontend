@@ -15,6 +15,15 @@ module.exports = {
   plugins: [
     'html'
   ],
+  // 全局变量
+  'globals': {
+    '_': true,
+    'moment': true,
+    'Noty': true,
+    'Rx': true,
+    'jsyaml': true,
+    '$noty': true,
+  },
   // add your custom rules here
   'rules': {
     // allow paren-less arrow functions

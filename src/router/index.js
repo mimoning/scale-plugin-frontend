@@ -1,15 +1,21 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Hello from '@/view/pages/index'
+import RuleManagement from '@/view/pages/rule-management'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'Hello',
-      component: Hello
+      path: '/management',
+      name: 'RuleManagement',
+      component: RuleManagement
+    },
+    {
+      path: '*',
+      redirect: {
+        name: 'RuleManagement'
+      }
     }
   ]
 })

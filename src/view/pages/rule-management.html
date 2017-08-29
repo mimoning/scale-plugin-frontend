@@ -1,0 +1,13 @@
+<dao-setting-layout>
+  <div slot="layout-title">扩容规则管理</div>
+  <dao-setting-section>
+    <template slot="content">
+      <rule-list :rows="rules"></rule-list>
+    </template>
+  </dao-setting-section>
+  <dao-setting-section>
+    <template slot="content">
+      <service-list :rows="services"></service-list>
+    </template>
+  </dao-setting-section>
+</dao-setting-layout>
