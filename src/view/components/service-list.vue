@@ -22,8 +22,8 @@
           <td>{{ service.lbMode }}</td>
           <!-- 操作 -->
           <td>
-            <svg class="icon operate-icon">
-              <use xlink:href="#icon_trash"></use>
+            <svg class="icon operate-icon" v-dao-tooltip:top="'解除绑定'" @click="unbindRule(service)">
+              <use xlink:href="#icon_unplugged"></use>
             </svg>
           </td>
         </tr>
@@ -33,23 +33,14 @@
   </div>
 </template>
 <script>
-import { hub$$ } from '@/model/hub'
-
 import List from './list'
 
 export default {
   name: 'ServiceList',
   extends: List,
-  data () {
-    return {
-      searchRange: [
-        row => row.name
-      ]
-    }
-  },
   methods: {
-    refresh () {
-      hub$$.next('service')
+    unbindRule (serv) {
+      this.$emit('operation', 'unbind', serv)
     }
   }
 }

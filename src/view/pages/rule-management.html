@@ -8,9 +8,13 @@
     </dao-setting-section>
     <dao-setting-section>
       <template slot="content">
-        <service-list :rows="services"></service-list>
+        <service-list :rows="services" @operation="handleOperation"></service-list>
       </template>
     </dao-setting-section>
   </dao-setting-layout>
-  <rule-dialogs ref="dialog" @confirmRemove="handleRemove"></rule-dialogs>
+  <rule-dialogs
+    ref="dialog"
+    @confirmRemove="handleRemove"
+    @confirmUnbind="handleUnbind"
+  ></rule-dialogs>
 </div>

@@ -10,6 +10,15 @@ function getServices () {
   return Promise.resolve(SERVICES)
 }
 
+function unbindRule (serv) {
+  console.log(serv)
+  return new Promise(resolve => {
+    _.remove(SERVICES, service => service.name === serv.name)
+    resolve()
+  })
+}
+
 export default {
-  getServices
+  getServices,
+  unbindRule
 }

@@ -3,7 +3,6 @@ export default {
   props: ['rows'],
   data () {
     return {
-      moment,
       lodash: _,
       tableName: '',
       keyword: '',
@@ -42,20 +41,6 @@ export default {
         })
         return match
       })
-    },
-    // 点击某一行的事件
-    click (row, event) {
-      if (event.target.nodeName === 'use' ||
-        event.target.nodeName === 'svg' ||
-        event.target.nodeName === 'SPAN' ||
-        event.target.nodeName === 'A' ||
-        event.target.nodeName === 'BUTTON' ||
-        // 当其点在 popover 绑定元素上面也不能选中列表
-        event.path.some(node => node.classList && node.classList.contains('dao-popover'))
-      ) {
-        return
-      }
-      this.checkRow(row, !row.checked)
     },
     next () {
       this.page = this.page + 1
