@@ -1,13 +1,16 @@
-<dao-setting-layout>
-  <div slot="layout-title">扩容规则管理</div>
-  <dao-setting-section>
-    <template slot="content">
-      <rule-list :rows="rules"></rule-list>
-    </template>
-  </dao-setting-section>
-  <dao-setting-section>
-    <template slot="content">
-      <service-list :rows="services"></service-list>
-    </template>
-  </dao-setting-section>
-</dao-setting-layout>
+<div>
+  <dao-setting-layout>
+    <div slot="layout-title">扩容规则管理</div>
+    <dao-setting-section>
+      <template slot="content">
+        <rule-list :rows="rules" @operation="handleOperation"></rule-list>
+      </template>
+    </dao-setting-section>
+    <dao-setting-section>
+      <template slot="content">
+        <service-list :rows="services"></service-list>
+      </template>
+    </dao-setting-section>
+  </dao-setting-layout>
+  <rule-dialogs ref="dialog" @confirmRemove="handleRemove"></rule-dialogs>
+</div>

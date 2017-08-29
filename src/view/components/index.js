@@ -1,10 +1,12 @@
 import Vue from 'vue'
 // components
+import AlertDialog from './dialogs/alert-dialog'
 import EmptyState from './empty-state'
 import RuleList from './rule-list'
 import ServiceList from './service-list'
 
 const Components = {
+  AlertDialog,
   EmptyState,
   RuleList,
   ServiceList

@@ -42,10 +42,10 @@
           <td>{{ rule.service }}</td>
           <!-- 操作 -->
           <td>
-            <svg class="icon operate-icon">
+            <svg class="icon operate-icon" v-dao-tooltip:top="'修改规则'">
               <use xlink:href="#icon_wrench"></use>
             </svg>
-            <svg class="icon operate-icon">
+            <svg class="icon operate-icon" v-dao-tooltip:top="'删除规则'" @click="operation('remove', rule)">
               <use xlink:href="#icon_trash"></use>
             </svg>
           </td>
@@ -66,13 +66,18 @@ export default {
   data () {
     return {
       searchRange: [
-        row => row.name
+        row => row.name,
+        row => row.service
       ]
     }
   },
   methods: {
     refresh () {
       hub$$.next('rule')
+    },
+    // 触发操作
+    operation (opt, data) {
+      this.$emit('operation', opt, data)
     }
   }
 }

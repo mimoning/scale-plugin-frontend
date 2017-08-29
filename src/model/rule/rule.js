@@ -6,6 +6,38 @@ const RULES = [
     limit: 10,
     scan: '30s',
     service: '2048_game'
+  },
+  {
+    name: 'test1',
+    condition: 'cpu: 60%',
+    step: 3,
+    limit: 10,
+    scan: '30s',
+    service: '2048_game'
+  },
+  {
+    name: 'test2',
+    condition: 'cpu: 60%',
+    step: 3,
+    limit: 10,
+    scan: '30s',
+    service: '2048_game'
+  },
+  {
+    name: 'test3',
+    condition: 'cpu: 60%',
+    step: 3,
+    limit: 10,
+    scan: '30s',
+    service: '2048_game'
+  },
+  {
+    name: 'test4',
+    condition: 'cpu: 60%',
+    step: 3,
+    limit: 10,
+    scan: '30s',
+    service: '2048_game'
   }
 ]
 
