@@ -15,7 +15,7 @@
 // Cin 的神奇代码，可以生成一堆 margin 和 padding 的 class。
 // 形如 .mt-md .mb-xs .p-none，分为 (m|p)(t|r|b|l)?-(none|xs|sm|md|lg) 这样子的样式规格
 // 定义边距变量
-$help-box-blanks: ('.m': 'margin', '.p': 'padding');
+$help-box-blanks: ('.m': 'margin', '.p': 'padding', '.b': 'border');
 // 循环，是 margin 还是 padding
 @each $help-box-blank-class, $help-box-blank in $help-box-blanks {
   // 定义尺寸变量
@@ -34,4 +34,71 @@ $help-box-blanks: ('.m': 'margin', '.p': 'padding');
       }
     }
   }
+}
+
+@import '~daoColor';
+
+.complicate-dialog {
+  .dao-dialog-container {
+    width: 900px!important;
+  }
+  .dao-dialog-body {
+    height: 100%;
+  }
+}
+
+// 团队详情弹框
+.side-bar-dialog {
+  padding: 0;
+  height: 100%;
+  min-height: 400px;
+  display: flex;
+  .dialog-nav {
+    width: 170px;
+    flex-basis: 170px;
+    flex: none;
+    background-color: $white-dark;
+    ul {
+      margin: 10px 0;
+      padding: 0;
+      list-style: none;
+      li {
+        padding-left: 20px;
+        color: $black-dark;
+        line-height: 30px;
+        cursor: pointer;
+        &.active {
+          background-color: rgba(155, 163, 175, .3);
+        }
+      }
+    }
+  }
+  .dialog-content {
+    padding: 20px;
+    flex: auto;
+  }
+}
+
+.error-text {
+  color: $red;
+}
+
+.success-text {
+  color: $green;
+}
+
+
+.dao-table-page {
+  margin-top: 10px;
+  height: 32px;
+}
+
+.dao-table-page-span {
+  display: inline-block;
+  margin-left: 20px;
+  color: $grey-dark;
+}
+
+.overflow-hidden {
+  overflow: hidden;
 }
