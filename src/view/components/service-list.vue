@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="dao-table-toolbar">
-      <button class="dao-btn blue">绑定规则</button>
+      <button class="dao-btn blue" @click="bindRule">绑定规则</button>
     </div>
     <table class="dao-table row">
       <thead>
@@ -39,8 +39,13 @@ export default {
   name: 'ServiceList',
   extends: List,
   methods: {
+    // 解绑规则
     unbindRule (serv) {
       this.$emit('operation', 'unbind', serv)
+    },
+    // 绑定规则
+    bindRule () {
+      this.$emit('operation', 'bindRule')
     }
   }
 }

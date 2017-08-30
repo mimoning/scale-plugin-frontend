@@ -18,7 +18,19 @@ function unbindRule (serv) {
   })
 }
 
+function bindRule (serv, rule) {
+  return new Promise(resolve => {
+    SERVICES.push({
+      name: serv,
+      bindRule: rule,
+      lbMode: 'F5 负载均衡'
+    })
+    resolve()
+  })
+}
+
 export default {
   getServices,
-  unbindRule
+  unbindRule,
+  bindRule
 }

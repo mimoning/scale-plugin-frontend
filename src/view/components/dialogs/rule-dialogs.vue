@@ -17,14 +17,22 @@
       :primaryText="unbind.config.primaryText"
       @confirm="handleUnbind"
     ></alert-dialog>
+    <!-- bind rule -->
+    <bind-rule
+      :visible.sync="bindRule.visible"
+    ></bind-rule>
   </div>
 </template>
 <script>
 import MultiDialog from './multi-dialog'
+import BindRule from './bind-rule'
 
 export default {
   name: 'RuleDialogs',
   extends: MultiDialog,
+  components: {
+    BindRule
+  },
   data () {
     return {
       remove: {
@@ -43,11 +51,14 @@ export default {
           primaryText: '确定'
         },
         data: {}
+      },
+      bindRule: {
+        visible: false
       }
     }
   },
   created () {
-    this.bindEvents('remove', 'unbind')
+    this.bindEvents('remove', 'unbind', 'bindRule')
   },
   methods: {
     handleRemove () {

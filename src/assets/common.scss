@@ -11,3 +11,27 @@
     color: inherit;
   }
 }
+
+// Cin 的神奇代码，可以生成一堆 margin 和 padding 的 class。
+// 形如 .mt-md .mb-xs .p-none，分为 (m|p)(t|r|b|l)?-(none|xs|sm|md|lg) 这样子的样式规格
+// 定义边距变量
+$help-box-blanks: ('.m': 'margin', '.p': 'padding');
+// 循环，是 margin 还是 padding
+@each $help-box-blank-class, $help-box-blank in $help-box-blanks {
+  // 定义尺寸变量
+  $help-box-sizes: ('-none': 0px, '-xs': 5px, '-sm': 10px, '-md': 15px, '-lg': 20px);
+  // 循环尺寸
+  @each $help-box-size-class, $help-box-size in $help-box-sizes {
+    #{$help-box-blank-class}#{$help-box-size-class} {
+      #{$help-box-blank}: $help-box-size !important;
+    }
+    // 定义方向变量
+    $help-box-directions: ('t': '-top', 'r': '-right', 'b': '-bottom', 'l': '-left');
+    // 循环方向 上、右、下、左
+    @each $help-box-direction-class, $help-box-direction in $help-box-directions {
+      #{$help-box-blank-class}#{$help-box-direction-class}#{$help-box-size-class} {
+        #{$help-box-blank}#{$help-box-direction}: $help-box-size !important;
+      }
+    }
+  }
+}
