@@ -19,19 +19,26 @@
     ></alert-dialog>
     <!-- bind rule -->
     <bind-rule
-      :visible.sync="bindRule.visible"
-    ></bind-rule>
+      :visible.sync="bindRule.visible">
+    </bind-rule>
+    <!-- modify rule -->
+    <modify-rule
+      :visible.sync="modifyRule.visible"
+      :data="modifyRule.data">
+    </modify-rule>
   </div>
 </template>
 <script>
 import MultiDialog from './multi-dialog'
 import BindRule from './bind-rule'
+import ModifyRule from './modify-rule'
 
 export default {
   name: 'RuleDialogs',
   extends: MultiDialog,
   components: {
-    BindRule
+    BindRule,
+    ModifyRule
   },
   data () {
     return {
@@ -54,11 +61,15 @@ export default {
       },
       bindRule: {
         visible: false
+      },
+      modifyRule: {
+        visible: false,
+        data: {}
       }
     }
   },
   created () {
-    this.bindEvents('remove', 'unbind', 'bindRule')
+    this.bindEvents('remove', 'unbind', 'bindRule', 'modifyRule')
   },
   methods: {
     handleRemove () {

@@ -37,12 +37,12 @@
           <!-- 扩容上限 -->
           <td>{{ rule.limit }}</td>
           <!-- 扫描间隔 -->
-          <td>{{ rule.scan }}</td>
+          <td>{{ rule.scan }} s</td>
           <!-- 服务名称 -->
           <td>{{ rule.service }}</td>
           <!-- 操作 -->
           <td>
-            <svg class="icon operate-icon" v-dao-tooltip:top="'修改规则'">
+            <svg class="icon operate-icon" v-dao-tooltip:top="'修改规则'" @click="operation('modifyRule', rule)">
               <use xlink:href="#icon_wrench"></use>
             </svg>
             <svg class="icon operate-icon" v-dao-tooltip:top="'删除规则'" @click="operation('remove', rule)">

@@ -4,7 +4,7 @@ const RULES = [
     condition: 'cpu: 60%',
     step: 3,
     limit: 10,
-    scan: '30s',
+    scan: 30,
     service: '2048_game'
   },
   {
@@ -12,7 +12,7 @@ const RULES = [
     condition: 'cpu: 60%',
     step: 3,
     limit: 10,
-    scan: '30s',
+    scan: 30,
     service: '2048_game'
   },
   {
@@ -20,7 +20,7 @@ const RULES = [
     condition: 'cpu: 60%',
     step: 3,
     limit: 10,
-    scan: '30s',
+    scan: 30,
     service: '2048_game'
   },
   {
@@ -28,7 +28,7 @@ const RULES = [
     condition: 'cpu: 60%',
     step: 3,
     limit: 10,
-    scan: '30s',
+    scan: 30,
     service: '2048_game'
   },
   {
@@ -36,7 +36,7 @@ const RULES = [
     condition: 'cpu: 60%',
     step: 3,
     limit: 10,
-    scan: '30s',
+    scan: 30,
     service: '2048_game'
   }
 ]
@@ -59,8 +59,19 @@ function delRule (name) {
   })
 }
 
+function modifyRule (rule, params) {
+  return new Promise(resolve => {
+    _.chain(RULES)
+     .find(r => r.name === rule)
+     .merge(params)
+     .value()
+    resolve()
+  })
+}
+
 export default {
-  getRules,
   addRule,
-  delRule
+  delRule,
+  getRules,
+  modifyRule
 }
