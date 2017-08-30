@@ -26,17 +26,23 @@
       :visible.sync="modifyRule.visible"
       :data="modifyRule.data">
     </modify-rule>
+    <!-- create rule -->
+    <create-rule
+      :visible.sync="createRule.visible">
+    </create-rule>
   </div>
 </template>
 <script>
 import MultiDialog from './multi-dialog'
 import BindRule from './bind-rule'
 import ModifyRule from './modify-rule'
+import CreateRule from './create-rule'
 
 export default {
   name: 'RuleDialogs',
   extends: MultiDialog,
   components: {
+    CreateRule,
     BindRule,
     ModifyRule
   },
@@ -65,11 +71,14 @@ export default {
       modifyRule: {
         visible: false,
         data: {}
+      },
+      createRule: {
+        visible: false
       }
     }
   },
   created () {
-    this.bindEvents('remove', 'unbind', 'bindRule', 'modifyRule')
+    this.bindEvents('remove', 'unbind', 'bindRule', 'modifyRule', 'createRule')
   },
   methods: {
     handleRemove () {

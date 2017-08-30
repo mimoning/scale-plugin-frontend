@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="dao-table-toolbar">
-      <button class="dao-btn blue">添加规则</button>
+      <button class="dao-btn blue" @click="operation('createRule')">添加规则</button>
       <button class="dao-btn ghost pull-right ml-sm"
         title="刷新"
         style="padding: 7px;"
