@@ -129,6 +129,9 @@ export default {
           type: 'input',
           name: 'value',
           validate (data) {
+            if (!/^\d+$/.test(data.value)) {
+              return '阈值只能为数值'
+            }
             if (data.value > 100) {
               return '阈值不应该超过 100%'
             }
@@ -193,8 +196,8 @@ export default {
     },
     canModify () {
       return !(_.isEqual(this.settings, this.data) &&
-        this.settings.condition.cpu &&
-        this.settings.condition.mem &&
+        (this.settings.condition.cpu ||
+        this.settings.condition.mem) &&
         this.settings.limit &&
         this.settings.scan &&
         this.settings.step) &&
