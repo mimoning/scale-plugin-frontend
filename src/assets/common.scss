@@ -63,7 +63,7 @@ $help-box-blanks: ('.m': 'margin', '.p': 'padding', '.b': 'border');
       padding: 0;
       list-style: none;
       li {
-        padding-left: 20px;
+        padding: 4px 20px;;
         color: $black-dark;
         line-height: 30px;
         cursor: pointer;
@@ -87,6 +87,9 @@ $help-box-blanks: ('.m': 'margin', '.p': 'padding', '.b': 'border');
   color: $green;
 }
 
+.yellow-text {
+  color: $yellow;
+}
 
 .dao-table-page {
   margin-top: 10px;

@@ -31,7 +31,11 @@
           <!-- 规则名称 -->
           <td>{{ rule.name }}</td>
           <!-- 触发条件 -->
-          <td>{{ rule.condition }}</td>
+          <td>
+            <span v-show="rule.condition.cpu">cpu: {{ rule.condition.cpu }}%</span>
+            <span class="yellow-text" v-show="rule.condition.cpu && rule.condition.mem">{{ rule.condition.logic ? 'and' : 'or' }}</span>
+            <span v-show="rule.condition.mem">内存: {{ rule.condition.mem }}%</span>
+          </td>
           <!-- 步长 -->
           <td>{{ rule.step }}</td>
           <!-- 扩容上限 -->

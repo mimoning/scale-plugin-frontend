@@ -1,7 +1,10 @@
 const RULES = [
   {
     name: 'test',
-    condition: 'cpu: 60%',
+    condition: {
+      logic: 1,
+      cpu: 60
+    },
     step: 3,
     limit: 10,
     scan: 30,
@@ -9,7 +12,11 @@ const RULES = [
   },
   {
     name: 'test1',
-    condition: 'cpu: 60%',
+    condition: {
+      logic: 0,
+      cpu: 60,
+      mem: 20
+    },
     step: 3,
     limit: 10,
     scan: 30,
@@ -17,7 +24,11 @@ const RULES = [
   },
   {
     name: 'test2',
-    condition: 'cpu: 60%',
+    condition: {
+      logic: 1,
+      cpu: 60,
+      mem: 30
+    },
     step: 3,
     limit: 10,
     scan: 30,
@@ -25,7 +36,10 @@ const RULES = [
   },
   {
     name: 'test3',
-    condition: 'cpu: 60%',
+    condition: {
+      logic: 1,
+      cpu: 60
+    },
     step: 3,
     limit: 10,
     scan: 30,
@@ -33,7 +47,10 @@ const RULES = [
   },
   {
     name: 'test4',
-    condition: 'cpu: 60%',
+    condition: {
+      logic: 1,
+      cpu: 60
+    },
     step: 3,
     limit: 10,
     scan: 30,
