@@ -90,15 +90,17 @@ import ruleApi from '@/model/rule/rule'
 import Dialog from './dialog'
 
 // 初始化数据
-const _dataConfig = {
-  // 数据
-  name: '',
-  service: '',
-  triggerCondition: [],
-  // step
-  step: undefined,
-  scan: undefined,
-  limit: undefined
+function _dataConfig () {
+  return {
+    // 数据
+    name: '',
+    service: '',
+    triggerCondition: [],
+    // step
+    step: undefined,
+    scan: undefined,
+    limit: undefined
+  }
 }
 
 export default {
@@ -148,7 +150,7 @@ export default {
           name: 'value'
         }]
       },
-      dataConfig: _dataConfig
+      dataConfig: _dataConfig()
     }
   },
   computed: {
@@ -183,25 +185,19 @@ export default {
     isShow (val) {
       if (!val) {
         this.tab = 'basicInfo'
-        this.dataConfig = _dataConfig
+        this.dataConfig = _dataConfig()
       }
     }
   },
   methods: {
     createParams (data) {
-      console.log(data)
       const condition = _.reduce(data.triggerCondition, (sum, item) => {
-        return `${sum}${item.name}: ${item.value}% `
+        if (sum) {
+          return `${sum} ${this.condition ? 'and' : 'or'} ${item.name}: ${item.value}%`
+        }
+        return `${sum}${item.name}: ${item.value}%`
       }, '')
-      console.log(condition)
-      console.log({
-        name: data.name,
-        service: data.service,
-        condition,
-        scan: data.scan,
-        step: data.step,
-        limit: data.limit
-      })
+
       return {
         name: data.name,
         service: data.service,
