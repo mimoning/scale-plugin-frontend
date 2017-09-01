@@ -1,36 +1,8 @@
-const SERVICES = [
-  {
-    name: '2048_game',
-    bindRule: 'test',
-    lbMode: 'F5 负载均衡'
-  }
-]
-
 function getServices () {
-  return Promise.resolve(SERVICES)
-}
-
-function unbindRule (serv) {
-  console.log(serv)
-  return new Promise(resolve => {
-    _.remove(SERVICES, service => service.name === serv.name)
-    resolve()
-  })
-}
-
-function bindRule (serv, rule) {
-  return new Promise(resolve => {
-    SERVICES.push({
-      name: serv,
-      bindRule: rule,
-      lbMode: 'F5 负载均衡'
-    })
-    resolve()
-  })
+  return $http.get('/api/services')
+    .then(res => res.data)
 }
 
 export default {
-  getServices,
-  unbindRule,
-  bindRule
+  getServices
 }

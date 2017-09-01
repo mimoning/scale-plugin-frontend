@@ -16,14 +16,16 @@
       <dao-setting-item>
         <template slot="label">规则名称</template>
         <template slot="content">
-          <dao-select v-model="targetRule" placeholder="选择规则名称" no-data-text="暂无可绑定的规则">
-            <dao-option v-for="rule in rules" :value="rule.name" :label="rule.name" :key="rule.name"></dao-option>
+          <dao-select v-model="targetRule" placeholder="选择规则名称" no-data-text="暂无可绑定的规则" :disabled="!targetService">
+            <dao-option-group>
+              <dao-option v-for="rule in rules" :value="rule.name" :label="rule.name" :key="rule.name"></dao-option>
+            </dao-option-group>
           </dao-select>
         </template>
       </dao-setting-item>
       <dao-setting-item>
         <template slot="label">负载均衡模式</template>
-        <template slot="content">LB/F5 LB/TCP LB</template>
+        <template slot="content">F5 负载均衡</template>
       </dao-setting-item>
     </dao-setting-section>
     <template slot="footer">
@@ -61,7 +63,7 @@ export default {
   computed: {
     rules () {
       if (this.rulesList) {
-        return this.rulesList
+        return _.filter(this.rulesList, rule => rule.service === this.targetService)
       }
       return []
     },
@@ -76,7 +78,7 @@ export default {
     this.bindRule$$
       .concatMap(({ data }) => serviceApi.bindRule(data.service, data.rule))
       .subscribe(() => {
-        hub$$.next('service')
+        hub$$.next('bind')
         this.success()
       }, () => {
         this.error()

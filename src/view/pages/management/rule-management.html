@@ -1,5 +1,5 @@
 <div>
-  <dao-setting-layout>
+  <dao-setting-layout v-show="!loading">
     <div slot="layout-title">扩容规则管理</div>
     <dao-setting-section>
       <template slot="content">
@@ -8,7 +8,7 @@
     </dao-setting-section>
     <dao-setting-section>
       <template slot="content">
-        <service-list :rows="services" @operation="handleOperation"></service-list>
+        <bind-list :rows="binds" @operation="handleOperation"></bind-list>
       </template>
     </dao-setting-section>
   </dao-setting-layout>

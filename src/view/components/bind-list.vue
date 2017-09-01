@@ -13,16 +13,16 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="service in chunks[page]" :key="service.name">
+        <tr v-for="bind in chunks[page]" :key="bind.name">
           <!-- 服务名称 -->
-          <td>{{ service.name }}</td>
+          <td>{{ bind.service }}</td>
           <!-- 规则名称 -->
-          <td>{{ service.bindRule }}</td>
+          <td>{{ bind.rule }}</td>
           <!-- LB 模式 -->
-          <td>{{ service.lbMode }}</td>
+          <td>{{ bind.lbMode }}</td>
           <!-- 操作 -->
           <td>
-            <svg class="icon operate-icon" v-dao-tooltip:top="'解除绑定'" @click="unbindRule(service)">
+            <svg class="icon operate-icon" v-dao-tooltip:top="'解除绑定'" @click="unbindRule(bind)">
               <use xlink:href="#icon_unplugged"></use>
             </svg>
           </td>
@@ -36,7 +36,7 @@
 import List from './list'
 
 export default {
-  name: 'ServiceList',
+  name: 'bindList',
   extends: List,
   methods: {
     // 解绑规则

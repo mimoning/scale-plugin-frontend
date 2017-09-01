@@ -12,10 +12,12 @@ function addRule (params) {
 
 function delRule (name) {
   return $http.delete(`/api/rules/${name}`)
+    .then(res => res.data)
 }
 
 function modifyRule (name, params) {
   return $http.put(`/api/rules/${name}`, new RuleOrigin(params))
+    .then(res => res.data)
 }
 
 export default {

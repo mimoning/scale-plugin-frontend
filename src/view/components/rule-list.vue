@@ -70,8 +70,8 @@ export default {
   data () {
     return {
       searchRange: [
-        row => row.name,
-        row => row.service
+        row => row.name || '',
+        row => row.service || ''
       ]
     }
   },

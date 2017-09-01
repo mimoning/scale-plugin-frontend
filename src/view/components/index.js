@@ -1,17 +1,19 @@
 import Vue from 'vue'
 // components
 import AlertDialog from './dialogs/alert-dialog'
+import BindList from './bind-list'
 import EmptyState from './empty-state'
+import Loading from './loading'
 import LogList from './log-list'
 import RuleList from './rule-list'
-import ServiceList from './service-list'
 
 const Components = {
   AlertDialog,
+  BindList,
   EmptyState,
+  Loading,
   LogList,
-  RuleList,
-  ServiceList
+  RuleList
 }
 
 const components = {}

@@ -5,7 +5,9 @@ const services$$ = hub$$.filter(jobs => jobs.includes('service'))
 const servicesVm$$ = new Rx.BehaviorSubject().filter(v => v)
 
 services$$.concatMap(serviceApi.getServices)
-  .map(servs => _.map(servs, serv => _.clone(serv)))
+  .map(servs =>
+    _.map(servs, serv => ({ name: serv }))
+  )
   .subscribe(servicesVm$$)
 
 servicesVm$$.subscribe(res => {
