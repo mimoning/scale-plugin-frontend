@@ -1,3 +1,5 @@
+import { RuleOrigin } from './rule.factory'
+
 const RULES = [
   {
     name: 'test',
@@ -59,14 +61,13 @@ const RULES = [
 ]
 
 function getRules () {
-  return Promise.resolve(RULES)
+  return $http.get('/api/rules')
+    .then(res => res.data)
 }
 
 function addRule (params) {
-  return new Promise(resolve => {
-    RULES.push(params)
-    resolve()
-  })
+  return $http.post('/api/rules', new RuleOrigin(params))
+    .then(res => res.data)
 }
 
 function delRule (name) {

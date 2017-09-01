@@ -4,8 +4,9 @@ import Vue from 'vue'
 import VueRx from 'vue-rx'
 import { Observable, Subscription, Subject, BehaviorSubject } from 'rxjs'
 import daoStyle from 'dao-style-package-vue'
-
+// 此处 import 的顺序不能错
 import '@/assets/const'
+import '@/assets/http'
 
 import App from './App'
 import router from './router'

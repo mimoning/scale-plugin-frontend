@@ -7,6 +7,18 @@ import { Observable, Subscription, Subject, BehaviorSubject } from 'rxjs'
 import 'noty/lib/noty.css'
 import 'animate.css'
 
+const defaultUrl = 'http://192.168.100.30:30002'
+let API_URL = defaultUrl
+console.log(process.env)
+if (process.env.API_URL) {
+  API_URL = process.env.API_URL
+  // API_URL 不能是 /, 否则最终 XHR 的请求 url 就变成了 http://api/networks 这样
+  if (process.env.API_URL === '/') {
+    API_URL = '.'
+  }
+}
+console.log(API_URL)
+
 Noty.overrideDefaults({
   layout: 'topCenter',
   theme: 'relax',
@@ -33,6 +45,7 @@ const $noty = {
 }
 
 Object.assign(window, {
+  API_URL,
   _: lodash,
   Rx: { Observable, Subscription, Subject, BehaviorSubject },
   $http: axios,

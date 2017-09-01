@@ -22,7 +22,7 @@
           <th>步长</th>
           <th>扩容上限</th>
           <th>扫描间隔</th>
-          <th>服务名称</th>
+          <th>服务</th>
           <th>操作</th>
         </tr>
       </thead>

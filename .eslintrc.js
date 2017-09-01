@@ -23,6 +23,8 @@ module.exports = {
     'Rx': true,
     'jsyaml': true,
     '$noty': true,
+    '$http': true,
+    'API_URL': true
   },
   // add your custom rules here
   'rules': {
