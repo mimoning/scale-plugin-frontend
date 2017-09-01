@@ -212,7 +212,7 @@ export default {
         }
         // 遍历获取的触发条件数据，格式化成需要的键值对格式 { logic, cpu, mem }
         _.forEach(val, item => {
-          condition[item.name] = window.parseInt(item.value)
+          condition[item.name] = parseFloat(item.value)
         })
         this.dataConfig.condition = condition
       }

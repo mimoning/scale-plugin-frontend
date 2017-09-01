@@ -3,7 +3,9 @@ import ruleApi from './rule'
 import { Rule } from './rule.factory'
 
 const rules$$ = hub$$.filter(jobs => jobs.includes('rule'))
-const operator$$ = new Rx.BehaviorSubject().filter(v => v).switchMap(({rule, opt}) => ruleApi[opt](rule))
+const operator$$ = new Rx.Subject()
+  .filter(v => v)
+  .concatMap(({rule, opt}) => ruleApi[opt](rule))
 const rulesVm$$ = new Rx.BehaviorSubject()
 
 rules$$.concatMap(ruleApi.getRules)
@@ -23,7 +25,8 @@ function delRule (rule) {
   return operator$$.first()
 }
 
-operator$$.subscribe(() => hub$$.next('all'))
+operator$$
+  .subscribe(() => hub$$.next('all'))
 
 rulesVm$$.subscribe(res => {
   // console.log(res)

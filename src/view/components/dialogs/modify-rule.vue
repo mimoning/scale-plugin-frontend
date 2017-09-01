@@ -181,7 +181,7 @@ export default {
       this.conditionError = this.isErrorCondition(val)
       if (!this.conditionError) {
         _.forEach(val, item => {
-          this.settings.condition[item.name] = window.parseInt(item.value)
+          this.settings.condition[item.name] = parseFloat(item.value)
         })
       }
     }
