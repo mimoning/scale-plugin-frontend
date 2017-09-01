@@ -8,6 +8,7 @@ services$$.concatMap(serviceApi.getServices)
   .map(servs =>
     _.map(servs, serv => ({ name: serv }))
   )
+  .catch(() => [])
   .subscribe(servicesVm$$)
 
 servicesVm$$.subscribe(res => {

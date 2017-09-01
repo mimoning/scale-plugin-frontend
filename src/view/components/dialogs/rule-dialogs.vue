@@ -60,7 +60,7 @@ export default {
         visible: false,
         config: {
           header: '解除绑定',
-          content: () => `确定要将服务 ${this.unbind.data.service} 和扩容规则 ${this.unbind.data.rule} 解绑吗？`,
+          content: () => `确定要将服务 ${this.unbind.data.service} 和扩容规则 ${this.unbind.data.name} 解绑吗？`,
           primaryText: '确定'
         },
         data: {}

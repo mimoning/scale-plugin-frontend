@@ -5,10 +5,8 @@
   import { hub$$ } from '@/model/hub'
   import {
     rulesVm$$,
-    // addRule,
     delRule
   } from '@/model/rule/rule.stream'
-  import { bindsVm$$ } from '@/model/bind/bind.stream'
   import serviceApi from '@/model/service/service'
 
   import RuleDialogs from '@/view/components/dialogs/rule-dialogs'
@@ -18,10 +16,14 @@
     components: {
       RuleDialogs
     },
-    subscriptions: {
-      loading: loading.loading$$,
-      rules: rulesVm$$,
-      binds: bindsVm$$
+    subscriptions () {
+      const bindsVm$$ = rulesVm$$
+        .map(rules => _.filter(rules, rule => rule.enable))
+      return {
+        loading: loading.loading$$,
+        rules: rulesVm$$,
+        binds: bindsVm$$
+      }
     },
     data () {
       return {

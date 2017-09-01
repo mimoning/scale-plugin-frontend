@@ -26,7 +26,8 @@ class Rule {
       step: data.step,
       limit: data.max_replicas,
       scan: data.interval,
-      service: data.service_name
+      service: data.service_name,
+      enable: data.enable
     })
   }
 }

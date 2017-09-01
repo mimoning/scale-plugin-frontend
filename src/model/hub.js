@@ -1,8 +1,7 @@
 const Jobs = [
   'rule',
   'service',
-  'log',
-  'bind'
+  'log'
 ]
 
 const hub$$ = new Rx.Subject()

@@ -9,10 +9,10 @@ const operator$$ = new Rx.Subject()
 const rulesVm$$ = new Rx.BehaviorSubject()
 
 rules$$.concatMap(ruleApi.getRules)
-  .map(rules => {
-    console.log(rules)
-    return _.map(rules, rule => new Rule(rule))
-  })
+  .catch(() => Rx.Observable.of([]))
+  .map(rules =>
+    _.map(rules, rule => new Rule(rule))
+  )
   .subscribe(rulesVm$$)
 
 function addRule (rule) {

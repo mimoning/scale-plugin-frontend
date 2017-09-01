@@ -1,5 +1,5 @@
 function getServices () {
-  return $http.get('/api/services')
+  return $http.get('/services')
     .then(res => res.data)
 }
 
