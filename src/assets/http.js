@@ -18,14 +18,14 @@ try {
   DCE_TOKEN = JSON.parse(DCE_TOKEN)
 } catch (e) {}
 
-const app = location.search
-  ? location.search.split('&')
-  .filter(v => v.includes('ObjectId'))[0]
-  .split('=')[1]
-  : ''
+// const app = location.search
+//   ? location.search.split('&')
+//   .filter(v => v.includes('ObjectId'))[0]
+//   .split('=')[1]
+//   : ''
 
 Object.assign($http.defaults, {
-  baseURL: `${API_URL}/api${'/' + app}`,
+  baseURL: `${API_URL}/api`,
   headers: {
     'X-DCE-Access-Token': DCE_TOKEN
   }
