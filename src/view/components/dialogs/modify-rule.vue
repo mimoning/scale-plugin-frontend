@@ -45,15 +45,19 @@
 
         <dao-setting-section class="bt-none" v-if="tab === 'config'">
           <dao-setting-item>
-            <template slot="label">单次扩容数量</template>
+            <template slot="label">扫描间隔（s）</template>
             <template slot="content">
-              <input type="number" v-model.number="settings.step" class="dao-control">
+              <dao-select v-model="settings.scan">
+                <dao-option :value="30" label="30 s"></dao-option>
+                <dao-option :value="45" label="45 s"></dao-option>
+                <dao-option :value="60" label="60 s"></dao-option>
+              </dao-select>
             </template>
           </dao-setting-item>
           <dao-setting-item>
-            <template slot="label">扫描间隔（s）</template>
+            <template slot="label">单次扩容数量</template>
             <template slot="content">
-              <input type="number" v-model.number="settings.scan" class="dao-control">
+              <input type="number" v-model.number="settings.step" class="dao-control">
             </template>
           </dao-setting-item>
           <dao-setting-item>

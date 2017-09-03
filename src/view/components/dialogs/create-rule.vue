@@ -53,18 +53,25 @@
         </dao-setting-section>
 
         <dao-setting-section class="bt-none" v-show="tab === 'config'">
+          <!-- 稻苗间隔 -->
+          <dao-setting-item>
+            <template slot="label">扫描间隔</template>
+            <template slot="content">
+              <dao-select v-model="dataConfig.scan">
+                <dao-option :value="30" label="30 s"></dao-option>
+                <dao-option :value="45" label="45 s"></dao-option>
+                <dao-option :value="60" label="60 s"></dao-option>
+              </dao-select>
+            </template>
+          </dao-setting-item>
+          <!-- 单次扩容数量输入框 -->
           <dao-setting-item>
             <template slot="label">单次扩容数量</template>
             <template slot="content">
               <input type="number" v-model.number="dataConfig.step" class="dao-control">
             </template>
           </dao-setting-item>
-          <dao-setting-item>
-            <template slot="label">扫描间隔（s）</template>
-            <template slot="content">
-              <input type="number" v-model.number="dataConfig.scan" class="dao-control">
-            </template>
-          </dao-setting-item>
+          <!-- 扩容上限输入框 -->
           <dao-setting-item>
             <template slot="label">扩容上限</template>
             <template slot="content">
@@ -74,19 +81,23 @@
         </dao-setting-section>
       </div>
     </div>
+    <!-- 对话框自定义底部内容 -->
     <template slot="footer">
+      <!-- 取消按钮 -->
       <button class="dao-btn ghost" @click="onClose">取消</button>
-      <button class="dao-btn blue" :disabled="!formComplete" v-stream:click="{
-        subject: create$$,
-        data: dataConfig
-      }">确定</button>
+      <!-- 确认按钮 -->
+      <button class="dao-btn blue" :disabled="!formComplete" @click="handleCondirm(dataConfig)">确定</button>
     </template>
   </dao-dialog>
 </template>
 <script>
+// 引入整个应用的数据接口
 import { hub$$ } from '@/model/hub'
+// 引入服务的数据
 import { servicesVm$$ } from '@/model/service/service.stream'
+// 引入规则的 api 供调用
 import ruleApi from '@/model/rule/rule'
+// 引入对话框类
 import Dialog from './dialog'
 
 // 初始化数据
@@ -100,7 +111,7 @@ function _dataConfig () {
     },
     // step
     step: undefined,
-    scan: undefined,
+    scan: 30,
     limit: undefined
   }
 }
@@ -108,29 +119,37 @@ function _dataConfig () {
 export default {
   name: 'CreateRule',
   extends: Dialog,
+  // 订阅的数据
   subscriptions () {
-    this.create$$ = new Rx.Subject()
     return {
+      // 订阅了服务的列表
       services: servicesVm$$
     }
   },
+  // 组件的一些自定义属性
   data () {
     return {
+      // 对话框的自定义配置
       config: {
         title: '添加扩容规则'
       },
-      // 侧边栏
+      // 侧边栏所处的位置
       tab: 'basicInfo',
-      // 触发条件
+      // 触发条件可编辑表格的自定义配置
       conditionConfig: {
+        // 表格头部项
         header: [
           '资源',
           '条件',
           '阈值（%）'
         ],
+        // 表格内容项
         body: [{
+          // 表格内容类型
           type: 'select',
+          // 表格内容对应的行对象中的属性
           name: 'name',
+          // 表格内容默认值
           default: 'cpu',
           options: [
             {
@@ -149,6 +168,7 @@ export default {
         }, {
           type: 'input',
           name: 'value',
+          // 表格输入框的验证逻辑
           validate (data) {
             if (!/^\d+$/.test(data.value)) {
               return '阈值只能为数值'
@@ -163,13 +183,16 @@ export default {
           }
         }]
       },
+      // 触发条件的错误信息
       conditionError: '',
+      // 触发条件的输入数据
       triggerCondition: [],
+      // 初始化的数据，用来保存格式化之后的规则数据
       dataConfig: _dataConfig()
     }
   },
   computed: {
-    // 表单完整度验证
+    // 表单完整度验证, 当表单填写完整，且填写数据没有有错误的情况下，才能点击确认添加规则
     formComplete () {
       return this.dataConfig.name &&
         this.dataConfig.service &&
@@ -180,20 +203,9 @@ export default {
         this.dataConfig.limit
     }
   },
-  created () {
-    // 订阅创建规则数据流
-    this.create$$
-      .map(({ data }) => data)
-      .concatMap(ruleApi.addRule)
-      .subscribe(() => {
-        hub$$.next('rule')
-        $noty.success(`扩容规则 ${this.dataConfig.name} 创建成功`)
-        this.onClose()
-      }, () => {
-        $noty.error(`扩容规则 ${this.dataConfig.name} 创建失败`)
-      })
-  },
   watch: {
+    // 此处监听对话框的显示状态
+    // 如果对话框关闭，则把所有已填入的数据初始化，以防再次打开对话框时已有数据填充
     isShow (val) {
       if (!val) {
         this.tab = 'basicInfo'
@@ -215,22 +227,43 @@ export default {
         _.forEach(val, item => {
           condition[item.name] = window.parseInt(item.value)
         })
+        // 赋值
         this.dataConfig.condition = condition
       }
     }
   },
   methods: {
+    // 判断触发条件的数据是否有错误
     isErrorCondition (val) {
       // 如果去重后长度有改变，则说明有重复，则报错
       if (_.uniqBy(val, 'name').length < val.length) {
         return '不要重复对资源进行条件设置'
       }
       return ''
+    },
+    // 确认添加规则
+    handleCondirm (data) {
+      // 请求
+      ruleApi.addRule(data)
+        // 请求成功时
+        .then(() => {
+          // 更新规则列表的数据
+          hub$$.next('rule')
+          // 提示添加成功
+          $noty.success(`扩容规则 ${this.dataConfig.name} 创建成功`)
+          // 关闭对话框
+          this.onClose()
+        }, () => {
+          // 这里是添加失败的回调
+          // 提示添加失败
+          $noty.error(`扩容规则 ${this.dataConfig.name} 创建失败`)
+        })
     }
   }
 }
 </script>
 <style lang="scss">
+// 特殊样式
 .condition-select {
   width: 80px!important;
 }
