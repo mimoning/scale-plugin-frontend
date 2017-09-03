@@ -198,6 +198,7 @@ export default {
       if (!val) {
         this.tab = 'basicInfo'
         this.dataConfig = _dataConfig()
+        this.triggerCondition = []
       }
     },
     // 监听触发条件数据变化，实时将数组转化成需要的键值对
