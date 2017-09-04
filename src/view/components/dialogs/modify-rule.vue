@@ -133,13 +133,14 @@ export default {
           type: 'input',
           name: 'value',
           validate (data) {
-            if (!/^\d+$/.test(data.value)) {
+            const value = parseFloat(data.value)
+            if (isNaN(value)) {
               return '阈值只能为数值'
             }
-            if (data.value > 100) {
+            if (value > 100) {
               return '阈值不应该超过 100%'
             }
-            if (data.value <= 0) {
+            if (value <= 0) {
               return '阈值不应该小于或者等于 0'
             }
             return true

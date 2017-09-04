@@ -53,7 +53,7 @@
         </dao-setting-section>
 
         <dao-setting-section class="bt-none" v-show="tab === 'config'">
-          <!-- 稻苗间隔 -->
+          <!-- 扫描间隔 -->
           <dao-setting-item>
             <template slot="label">扫描间隔</template>
             <template slot="content">
@@ -170,13 +170,14 @@ export default {
           name: 'value',
           // 表格输入框的验证逻辑
           validate (data) {
-            if (!/^\d+$/.test(data.value)) {
+            const value = parseFloat(data.value)
+            if (isNaN(value)) {
               return '阈值只能为数值'
             }
-            if (data.value > 100) {
+            if (value > 100) {
               return '阈值不应该超过 100%'
             }
-            if (data.value <= 0) {
+            if (value <= 0) {
               return '阈值不应该小于或者等于 0'
             }
             return true
