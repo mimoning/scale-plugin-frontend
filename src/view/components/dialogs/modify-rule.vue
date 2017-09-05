@@ -185,9 +185,15 @@ export default {
     triggerCondition (val) {
       this.conditionError = this.isErrorCondition(val)
       if (!this.conditionError) {
+        const condition = {
+          logic: this.settings.condition.logic
+        }
+        // 遍历获取的触发条件数据，格式化成需要的键值对格式 { logic, cpu, mem }
         _.forEach(val, item => {
-          this.settings.condition[item.name] = window.parseInt(item.value)
+          condition[item.name] = window.parseFloat(item.value)
         })
+        // 赋值
+        this.settings.condition = condition
       }
     }
   },
